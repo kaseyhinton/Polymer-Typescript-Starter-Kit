@@ -7,14 +7,14 @@ The only difference is the use of typescript, gulp, and browsersync.
 
 ##### Prerequisites
 
-    ```
+    ```sh
     npm install -g polymer-cli
     npm install -g bower
     ```
 
 ##### Initialize project from template
 
-    ```
+    ```sh
     git clone polymer-typescript-starter-kit
     cd polymer-typescript-starter-kit
     bower install
@@ -26,18 +26,18 @@ The only difference is the use of typescript, gulp, and browsersync.
     This command watches the html and js files in the src file and updates
     the browsers. The typescript should compile on save.
 
-    ```
+    ```sh
     gulp
     ```
 ### Build
 
-    ```
+    ```sh
     polymer build
     ```
 
 ### Preview the build
 
-    ```
+    ```sh
     polymer serve build/unbundled
 
     polymer serve build/bundled
@@ -45,10 +45,10 @@ The only difference is the use of typescript, gulp, and browsersync.
     
 ### Run tests
     
-    ```
+    ```sh
     polymer test
     ```
-    
+
 ### Adding a new view
 
 You can extend the app by adding more views that will be demand-loaded
