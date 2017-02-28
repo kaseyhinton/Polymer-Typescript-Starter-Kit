@@ -7,47 +7,36 @@ The only difference is the use of typescript, gulp, and browsersync.
 
 ##### Prerequisites
 
-    ```sh
     npm install -g polymer-cli
     npm install -g bower
-    ```
 
 ##### Initialize project from template
 
-    ```sh
-    git clone polymer-typescript-starter-kit
+    git clone https://github.com/kaseyhinton/Polymer-Typescript-Starter-Kit.git
     cd polymer-typescript-starter-kit
     bower install
     npm install
-    ```
 
 ### Start the development server
     
     This command watches the html and js files in the src file and updates
     the browsers. The typescript should compile on save.
 
-    ```sh
     gulp
-    ```
+
 ### Build
 
-    ```sh
     polymer build
-    ```
 
 ### Preview the build
 
-    ```sh
     polymer serve build/unbundled
 
     polymer serve build/bundled
-    ```
     
 ### Run tests
     
-    ```sh
     polymer test
-    ```
 
 ### Adding a new view
 
