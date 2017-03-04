@@ -1,0 +1,38 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer-ts/polymer-ts.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/lss-inject/lss-requester-behavior.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="shared-styles.html">
+<dom-module id="my-zipcode">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+    <iron-image preload src="../images/house1.jpg" placeholder="data:image/jpeg;base64,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"
+      fade style="width:100%; height:100%;" sizing="cover"></iron-image>
+    <div class="card">
+      <form is="iron-form" id="form">
+        <paper-input label="Zipcode" error-message="Zipcode is required" maxLength="5" required value="{{zipcode}}"></paper-input>
+        <paper-button raised id="submit">SEE HOW MUCH YOU CAN GET</paper-button>
+      </form>
+    </div>
+  </template>
+  <script type="text/javascript" src="my-zipcode.js"></script>
+</dom-module>

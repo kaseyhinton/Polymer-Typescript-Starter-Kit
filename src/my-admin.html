@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer-ts/polymer-ts.html">
+<link rel="import" href="../bower_components/polymerfire/firebase.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/iron-data-table/iron-data-table.html">
+<link rel="import" href="shared-styles.html">
+<dom-module id="my-admin">
+    <template>
+        <style include="shared-styles">
+             :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        </style>
+        <firebase-query id="query" app-name="down-payment-estimate" path="/leads" data="{{data}}">
+        </firebase-query>
+        <div>
+            <iron-data-table items="[[data]]">
+                <data-table-column name="Name">
+                    <template>[[item.name]]</template>
+                </data-table-column>
+                <data-table-column name="Email">
+                    <template>[[item.email]]</template>
+                </data-table-column>
+                <!--<data-table-column name="House Price">
+                    <template>[[item.housePrice]]</template>
+                </data-table-column>
+                <data-table-column name="First Time Home Buyer">
+                    <template>[[item.firstTimeHomeBuyer]]</template>
+                </data-table-column>
+                <data-table-column name="Credit Score Over 640">
+                    <template>[[item.creditScoreOver640]]</template>
+                </data-table-column>
+                <data-table-column name="Rural Community">
+                    <template>[[item.ruralCommunity]]</template>
+                </data-table-column> -->
+                <data-table-column name="Zipcode">
+                    <template>[[item.zipcode]]</template>
+                </data-table-column>
+                <data-table-column name="Date">
+                    <template>[[item.date]]</template>
+                </data-table-column>
+            </iron-data-table>
+        </div>
+    </template>
+    <script type="text/javascript" src="my-admin.js"></script>
+</dom-module>

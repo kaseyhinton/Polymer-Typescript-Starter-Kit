@@ -20,13 +20,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="my-icons.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/lss-inject/lss-provider-behavior.html">
+<link rel="import" href="../bower_components/lss-inject/lss-requester-behavior.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="./model/User.html">
+<link rel="import" href="./my-icons.html">
 <dom-module id="my-app">
   <template>
     <style>
        :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        --app-primary-color: #3F51B5;
+        --app-secondary-color: #00796B;
+        --black: #212121;
+        --white: #FFFFFF;
+        --grey: #757575;
+        --app-background: #eeeeee;
         display: block;
       }
       
@@ -47,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 0 16px;
         text-decoration: none;
-        color: var(--app-secondary-color);
+        color: var(--app-primary-color);
         line-height: 40px;
       }
       
@@ -55,17 +66,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+      
+      neon-animated-pages {
+        height: 100%;
+        width: 100%;
+      }
     </style>
+    <firebase-app name="down-payment-estimate" auth-domain="down-payment-estimate.firebaseapp.com" database-url="https://down-payment-estimate.firebaseio.com"
+      api-key="AIzaSyAxXKmW6cYC-1gw8m1kWF0zrV5g3qrnyRE">
+    </firebase-app>
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
-    <app-drawer-layout fullbleed>
+    <app-drawer-layout force-narrow fullbleed>
       <!-- Drawer content -->
       <app-drawer id="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="zipcode" href="/zipcode">Zipcode</a>
+          <a name="additional-info" href="/additional-info">Additional Info</a>
+          <a name="confirmation" href="/confirmation">Confirmation</a>
+          <a name="admin" href="/admin">Admin</a>
         </iron-selector>
       </app-drawer>
       <!-- Main content -->
@@ -73,15 +93,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Down Payment Calculator</div>
           </app-toolbar>
         </app-header>
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
+        <neon-animated-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main" entry-animation="fade-in-animation"
+          exit-animation="fade-out-animation">
+          <neon-animatable name="zipcode">
+            <my-zipcode active="[[isEqual('zipcode', page)]]" user="{{user}}"></my-zipcode>
+          </neon-animatable>
+          <neon-animatable name="additional-info">
+            <my-additional-info active="[[isEqual('additional-info', page)]]" user="{{user}}"></my-additional-info>
+          </neon-animatable>
+          <neon-animatable name="confirmation">
+            <my-confirmation active="[[isEqual('confirmation', page)]]" user="{{user}}"></my-confirmation>
+          </neon-animatable>
+          <neon-animatable name="admin">
+            <my-admin></my-admin>
+          </neon-animatable>
+          <neon-animatable name="404">
+            <my-404></my-404>
+          </neon-animatable>
+        </neon-animated-pages>
       </app-header-layout>
     </app-drawer-layout>
   </template>

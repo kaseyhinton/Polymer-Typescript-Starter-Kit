@@ -1,7 +1,16 @@
 /// <reference path='../bower_components/polymer-ts/polymer-ts.ts' />
 
+class HTMLElementExt {
+    querySelectorAll: any;
+}
+
+@behavior(LssProviderBehavior)
 @component('my-app')
 class MyApp extends polymer.Base {
+    // stand-in properties for behavior mixins 
+    provideInstance: (key: string, any) => void;
+
+    user: User;
 
     @property({
         type: String,
@@ -12,7 +21,7 @@ class MyApp extends polymer.Base {
 
     @observe('routeData.page')
     pageChanged(page: string) {
-        this.page = page || 'view1';
+        this.page = page || 'zipcode';
 
         var resolvedPageUrl = this.resolveUrl('my-' + this.page + '.html');
         this.importHref(resolvedPageUrl, null, this.showPage404, true);
@@ -22,13 +31,25 @@ class MyApp extends polymer.Base {
         }
     }
 
-    showPage404() {
-        this.set('routeData.page', 'view404');
+    @listen('navigate')
+    navigationHandler(event) {
+        this.set("routeData.page", event.detail.location);
     }
 
-    attached() { }
+    showPage404() {
+        this.set('page', '404');
+    }
 
-    ready() { }
+    isEqual(a, b): boolean {
+        return a === b;
+    }
+
+    attached() {
+    }
+
+    ready() {
+        this.user = new User();
+    }
 
 }
 MyApp.register();
