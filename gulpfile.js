@@ -39,22 +39,20 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('watch', ['browser-sync'], function () {
-    var jsWatcher = gulp.watch("**/*.js", {
-        interval: 1000
-    }).on('change', browserSync.reload);
 
-    jsWatcher.on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type);
+    var directoriesToWatch = ["src/**/*.js", "src/**/*.html", "*.js", "*.html", "images/*.*"]
+
+    directoriesToWatch.forEach(function (directory) {
+        console.log('Listening for changes at: ' + directory);
+        var jsWatcher = gulp.watch(directory, {
+            interval: 1000
+        }).on('change', browserSync.reload);
+
+        jsWatcher.on('change', function (event) {
+            console.log('File ' + event.path + ' was ' + event.type);
+        });
     });
 
-    var htmlWatcher = gulp.watch("**/*.html", {
-        interval: 1000
-    }).on('change', browserSync.reload);
-    htmlWatcher.on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type);
-    });
 });
-
-
 
 gulp.task('default', ['compile', 'polymerServe', 'watch']);

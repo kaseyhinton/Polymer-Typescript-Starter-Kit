@@ -2,6 +2,8 @@
 
 This is a clone from the polymer starter kit. https://github.com/PolymerElements/polymer-starter-kit
 The only difference is the use of typescript, gulp, and browsersync.
+Included is the visual studio code settings.json that hides .js and .jsmap
+files by default. It also sets format on save to true.
 
 ### Setup
 
